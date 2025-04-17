@@ -4,7 +4,7 @@
         <div class="col-span-1 md:col-span-2">
             <x-filament::card>
                 <table class="w-full text-sm border border-gray-200 mt-4">
-                    <thead class="bg-gray-100">
+                    <thead class="bg-gray-100 dark:bg-gray-800 dark:text-gray-100">
                         <tr>
                             <th class="p-2 text-left">Name</th>
                             <th class="p-2 text-right">Actions</th>
@@ -16,9 +16,14 @@
                             <tr class="border-t">
                                 <td class="p-2">{{ $role->name }}</td>
                                 <td class="p-2 text-right">
-                                    <button wire:click="edit({{ $role->id }})" class="text-blue-600 hover:underline">Edit</button>
-                                    <button wire:click="delete({{ $role->id }})" class="text-red-600 hover:underline"
-                                        onclick="return confirm('Are you sure you want to delete this?')">Delete</button>
+                                        <button wire:click="edit({{ $role->id }})" class="text-blue-600 hover:text-blue-800">
+                                            <x-heroicon-o-pencil class="w-5 h-5" />
+                                        </button>
+                                        <button wire:click="delete({{ $role->id }})"
+                                            onclick="return confirm('Are you sure you want to delete this?')"
+                                            class="text-red-600 hover:text-red-800">
+                                        <x-heroicon-o-trash class="w-5 h-5" />
+                                    </button>
                                 </td>
                             </tr>
                             @endforeach
@@ -44,7 +49,7 @@
                         @error('name') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
                     </div>
 
-                    <x-filament::button type="submit" class="w-full">
+                    <x-filament::button type="submit" class="w-full color-primary">
                         Save
                     </x-filament::button>
                 </form>
