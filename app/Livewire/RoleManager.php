@@ -12,11 +12,30 @@ class RoleManager extends Component
 
     public $roleId;
     public $name;
-
+    public $primaryKey = 'id';
 
     protected $rules = [
         'name' => 'required|string|max:255',
     ];
+
+    public function __construct() {
+        $this->form = [
+            [
+                'label' => 'Role',
+                'field' => 'name',
+                'type' => 'textarea'
+            ]
+        ];
+
+        $this->grid = [
+            [
+                'label' => 'Role',
+                'field' => 'name',
+                'value' => 'name',
+                'type' => 'text'
+            ],
+        ];
+    }
 
     public function save()
     {
@@ -44,8 +63,12 @@ class RoleManager extends Component
 
     public function render()
     {
-        return view('livewire.role-manager', [
-            'roles' => Role::latest()->paginate(10),
+        $query = Role::latest()->paginate(10);
+        return view('livewire.master', [
+            'pK' => $this->primaryKey,
+            'data' => $query,
+            'form' => $this->form,
+            'grid' => $this->grid
         ]);
     }
 }
